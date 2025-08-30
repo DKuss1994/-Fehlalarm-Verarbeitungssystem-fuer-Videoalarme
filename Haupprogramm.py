@@ -1,9 +1,12 @@
 from datetime import datetime
 import os
 import shutil # Fürs verschieben
+from excel_utils import load_customer_data
+from send_email import send_email
 
 inputs_dir = r"C:\Users\kussd\Desktop\Videoordner" # Hier kommen die Scrennshoots rein
 base_output_dir = r"C:\Users\kussd\Desktop\Video" #Hier werden Sie rein Sortiert
+excel_path = r"C:\Users\kussd\Desktop\Video\Datenbank.xlsx"
 def creation_dt(p):
     # Hole Erstellungzeit der Datei
     ts = os.path.getctime(p) # hier legen wir mit os.path.getctime den Time code in die Variable TS
@@ -40,14 +43,42 @@ def move_file(p, new_name, file_id,beschreibung):
 
     shutil.move (p, target_path)
     print (f"Verschoben: {p} -> {target_path}")
-
+    return target_path
 
 def main():
     for file in os.listdir(inputs_dir):
         p = os.path.join(inputs_dir,file)
         if os.path.isfile(p):
             new_name, file_id, beschreibung = rename_file(p)
-            move_file(p, new_name, file_id, beschreibung)
+            target_path = move_file(p, new_name, file_id, beschreibung)
+            customer = load_customer_data(excel_path, int(file_id))
+            if not customer:
+                print(f"X Keine Kundendaten für ID {file_id} gefunden. Bitte nachtragen")
+                continue
+            receiver = customer["E-Mail-Adresse-Kunde"]
+            objekt_name = customer.get("Objekt-Name", "Unbekanntes Objekt")
+
+            subject = f"Alarmmeldung {objekt_name} ({file_id})"
+            body = f"""Sehr geehrte Damen und Herren,
+            
+es wurde ein Alarm ausgelöst:
+- Objekt: {objekt_name}
+- ID: {file_id}
+- Beschreibung: {beschreibung}
+- Zeit: {creation_dt((target_path))}
+
+Im Anhang finden Sie den zugehörigen Screenshot
+
+Mit freundlichen Grüßen
+
+Ihre Leitstelle
+"""
+            send_email(
+                receiver=receiver,
+                subject=subject,
+                body=body,
+                attachment=target_path
+            )
 
 if __name__ == "__main__":
     main()
