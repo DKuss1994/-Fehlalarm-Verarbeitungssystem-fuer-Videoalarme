@@ -10,7 +10,6 @@ Screen2Mail ist ein Projekt, was einfach und schnell Screenshots versenden soll 
 - [Features](#features)
 - [Technologien](#technologien)
 - [Beispiele](#beispiele)
-- [Mitwirken](#mitwirken)
 - [Lizenz](#lizenz)
 - [Kontakt](#kontakt)
   
@@ -72,6 +71,8 @@ Wir müssen noch eine CSV Datei erstellen
 Wichtig an der CSV datei ist:
 - Das Objekt-ID,	E-Mail-Adresse-Kunde und	Objekt-Name genau so benannt in der 1 Zeile stehen hier ein Beispiel:
 ![Screenshot_2](https://github.com/user-attachments/assets/9ff20e49-436a-4dd9-a202-04b8a4055988 )
+
+## Features
 
 
     
