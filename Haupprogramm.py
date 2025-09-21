@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 import shutil # Fürs verschieben
-from excel_utils import load_customer_data
+from excel_utilis import load_customer_data
 from send_email import send_email
 
 inputs_dir = r"C:\Users\kussd\Desktop\Videoordner" # Hier kommen die Scrennshoots rein
