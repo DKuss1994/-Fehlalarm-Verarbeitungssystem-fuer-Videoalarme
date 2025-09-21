@@ -9,10 +9,11 @@ from email.mime.application import MIMEApplication
 #pm = PasswortManager(key_file="mail_schlüssel.key", enc_file="mail_pw.enc")
 
 #pm.erstelle_key()
-#pm.verschlüssel_password(#Password)
+#pm.verschlüssel_password("Verschlüsselendes Objekt rein tuen")
 
 
 def send_email(receiver: str, subject: str, body: str, attachment: str = None):
+    pm1 = PasswortManager(key_file="adressemail_schlüssel.key", enc_file="adressemail_pw.enc")
     sender = "kussdennisubi@web.de"
     pm = PasswortManager(key_file="mail_schlüssel.key", enc_file="mail_pw.enc")
     password = pm.lade_password()
