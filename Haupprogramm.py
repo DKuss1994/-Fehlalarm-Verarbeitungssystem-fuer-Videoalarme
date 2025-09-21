@@ -4,9 +4,9 @@ import shutil # Fürs verschieben
 from excel_utilis import load_customer_data
 from send_email import send_email
 
-inputs_dir = r"C:\Users\kussd\Desktop\Videoordner" # Hier kommen die Scrennshoots rein
-base_output_dir = r"C:\Users\kussd\Desktop\Video" #Hier werden Sie rein Sortiert
-excel_path = r"C:\Users\kussd\Desktop\Video\Datenbank.xlsx"
+inputs_dir = r"/home/dk/-Fehlalarm-Verarbeitungssystem-fuer-Videoalarme/Screenshot" # Hier kommen die Scrennshoots rein
+base_output_dir = r"/home/dk/-Fehlalarm-Verarbeitungssystem-fuer-Videoalarme/Videoalarme" #Hier werden Sie rein Sortiert
+excel_path = r"/home/dk/-Fehlalarm-Verarbeitungssystem-fuer-Videoalarme/Videoalarme/Kundedaten.csv"
 def creation_dt(p):
     # Hole Erstellungzeit der Datei
     ts = os.path.getctime(p) # hier legen wir mit os.path.getctime den Time code in die Variable TS

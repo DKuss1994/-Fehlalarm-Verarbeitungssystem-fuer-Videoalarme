@@ -2,18 +2,19 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
-from Vorlage import PasswortManager
+from Vorlagen import PasswortManager
 from email.mime.application import MIMEApplication
 
 
-#pw.erstelle_key()
-#pw.verschlüssel_password(#Hier einfach passwort eingeben als String)
-
+pm = PasswortManager(key_file="mail_schlüssel", enc_file="mail_pw")
+pw.erstelle_key()
+pw.verschlüssel_password(RSDGMY06YP3SQAX4WKYE)
 
 
 def send_email(receiver: str, subject: str, body: str, attachment: str = None):
     sender = "kussdennisubi@web.de"
     pm = PasswortManager(key_file="mail_schlüssel", enc_file="mail_pw")
+
     password = pm.lade_password()
     smtp_server = "smtp.web.de"
     port = 587
