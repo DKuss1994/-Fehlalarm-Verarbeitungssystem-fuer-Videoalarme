@@ -72,13 +72,52 @@ Wichtig an der CSV datei ist:
 - Das Objekt-ID,	E-Mail-Adresse-Kunde und	Objekt-Name genau so benannt in der 1 Zeile stehen hier ein Beispiel:
 ![Screenshot_2](https://github.com/user-attachments/assets/9ff20e49-436a-4dd9-a202-04b8a4055988 )
 
+---
+## Verwendung
+  1. Screenshot-Verarbeitung
+    - Umbenennung mit ID, Beschreibung und Zeitstempel.
+  
+  2. Ordnerstruktur & Ablage
+    - Verschiebt Screenshots automatisch in Unterordner nach ID-Bereich und Beschreibung.
+  
+  3. Kundendaten-Integration
+    -Liest Kundendaten aus Excel (E-Mail, Objektname).
+    -Prüft, ob Daten vorhanden sind.
+  
+  4. E-Mail-Versand
+    - Versendet Screenshots per SMTP mit Betreff, Body und Anhang.
+    - Nutzt verschlüsseltes Passwort für Login.
+
 ## Features
 
+1. Screenshot-Verarbeitung
 
-    
+  - Benennt Screenshots um: ID_Beschreibung_Zeitstempel.ext.
+  
+  - Nutzt Erstellungsdatum für Zeitstempel.
 
-  
+2. Ordnerstruktur & Ablage
+
+   - Organisiert Dateien automatisch nach ID-Bereichen und Beschreibung.
     
+   - Erstellt fehlende Ordner automatisch.
+
+3. Kundendaten-Integration
+
+    - Liest Daten aus Excel (E-Mail, Objektname).
     
-  
-  
+    - Prüft, ob Kundendaten vorhanden sind.
+
+4. E-Mail-Versand
+
+    - Sendet Screenshot per SMTP mit Betreff, Body und Anhang.
+    
+    - Nutzt verschlüsseltes Passwort für sichere Anmeldung.
+
+5. Passwort-Management
+
+    - Verschlüsselt und speichert Passwörter sicher mit Fernet.
+
+6. Automatisierung
+
+    - Alles läuft automatisch über main(), modular aufgebaut für Umbenennung, Ablage, Datenabfrage und Versand.
