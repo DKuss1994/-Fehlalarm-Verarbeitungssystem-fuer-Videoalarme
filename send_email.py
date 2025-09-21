@@ -6,15 +6,15 @@ from Vorlagen import PasswortManager
 from email.mime.application import MIMEApplication
 
 
-pm = PasswortManager(key_file="mail_schlüssel", enc_file="mail_pw")
-pw.erstelle_key()
-pw.verschlüssel_password(RSDGMY06YP3SQAX4WKYE)
+#pm = PasswortManager(key_file="mail_schlüssel.key", enc_file="mail_pw.enc")
+
+#pm.erstelle_key()
+#pm.verschlüssel_password(#Password)
 
 
 def send_email(receiver: str, subject: str, body: str, attachment: str = None):
     sender = "kussdennisubi@web.de"
-    pm = PasswortManager(key_file="mail_schlüssel", enc_file="mail_pw")
-
+    pm = PasswortManager(key_file="mail_schlüssel.key", enc_file="mail_pw.enc")
     password = pm.lade_password()
     smtp_server = "smtp.web.de"
     port = 587
