@@ -7,9 +7,9 @@ from send_email import send_email
 inputs_dir = r"/home/dk/-Fehlalarm-Verarbeitungssystem-fuer-Videoalarme/Screenshot" # Hier kommen die Scrennshoots rein
 base_output_dir = r"/home/dk/-Fehlalarm-Verarbeitungssystem-fuer-Videoalarme/Videoalarme" #Hier werden Sie rein Sortiert
 excel_path = r"/home/dk/-Fehlalarm-Verarbeitungssystem-fuer-Videoalarme/Videoalarme/Kundedaten.xlsx"
-def creation_dt(p):
+def creation_dt(file):
     # Hole Erstellungzeit der Datei
-    ts = os.path.getctime(p) # hier legen wir mit os.path.getctime den Time code in die Variable TS
+    ts = os.path.getctime(file) # hier legen wir mit os.path.getctime den Time code in die Variable TS
     # Formatiere das Dati, hübsch als String.
     return datetime.fromtimestamp(ts).strftime("%d.%m.%Y_%H-%M-%S")
 
@@ -26,7 +26,7 @@ def rename_file(p):
     ts = creation_dt(p) # Hier nehmen wir einfach TS für Zeitstempel und durch unsere Funktion creation_dt (p) wo p immer die Screenshot datei ist erstellen speichern wir den Zeitstempel.
     new_name = f"{file_id}_{beschreibung}_{ts}{ext}"#Hier wird jetzt alles zusammen gefügt id, beschreibung und der Zeitstempel mit der .jpg endung
     return new_name, file_id, beschreibung # Wichtig ist, dass wir new_name file_id und beschreibung übergeben. ID und beschreibung für die Ordner Struktur
-def move_file(p, new_name, file_id,beschreibung):
+def move_file(input_picture, new_name, file_id, beschreibung):
     """Verschiebt die Datei in die Zielstruktur"""
     #Bereich berechnen (z.B. 12101 -> 12100 - 12199)
     id_num = int(file_id) # hier machen wir aus dem strin eine Ganzzahl
@@ -41,16 +41,17 @@ def move_file(p, new_name, file_id,beschreibung):
     #Neuer Dateiname + Zielpfad
     target_path = os.path.join(target_dir, new_name)
 
-    shutil.move (p, target_path)
-    print (f"Verschoben: {p} -> {target_path}")
+    shutil.move (input_picture, target_path)
+    print (f"Verschoben: {input_picture} -> {target_path}")
     return target_path
 
 def main():
     for file in os.listdir(inputs_dir):
-        p = os.path.join(inputs_dir,file)
-        if os.path.isfile(p):
-            new_name, file_id, beschreibung = rename_file(p)
-            target_path = move_file(p, new_name, file_id, beschreibung)
+        inputs_picture = os.path.join(inputs_dir,file)
+        timestamp = creation_dt((inputs_picture))
+        if os.path.isfile(inputs_picture):
+            new_name, file_id, beschreibung = rename_file(inputs_picture)
+            target_path = move_file(inputs_picture, new_name, file_id, beschreibung)
             customer = load_customer_data(excel_path, int(file_id))
             if not customer:
                 print(f"X Keine Kundendaten für ID {file_id} gefunden. Bitte nachtragen")
@@ -65,7 +66,7 @@ es wurde ein Alarm ausgelöst:
 - Objekt: {objekt_name}
 - ID: {file_id}
 - Beschreibung: {beschreibung}
-- Zeit: {creation_dt((target_path))}
+- Zeit: {timestamp}
 
 Im Anhang finden Sie den zugehörigen Screenshot
 
