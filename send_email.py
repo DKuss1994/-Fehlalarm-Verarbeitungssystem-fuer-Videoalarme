@@ -6,8 +6,8 @@ from Vorlage import PasswortManager
 from email.mime.application import MIMEApplication
 
 
-#pw.v.erstelle_key()
-#pw.v.verschlüssel_password(#Hier einfach passwort eingeben als String)
+#pw.erstelle_key()
+#pw.verschlüssel_password(#Hier einfach passwort eingeben als String)
 
 
 
